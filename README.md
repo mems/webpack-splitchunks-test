@@ -6,7 +6,7 @@
 
 ## Bundle One Css File
 
-It's expected, and the color is green
+It's expected, and the color is green, see the import order in `src/index.js`
 
 ## Split CSS Chunks (uncomment the comments in webpack.config.js)
 
