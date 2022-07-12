@@ -37,14 +37,14 @@ const config = {
     splitChunks: {
       chunks: "all",
       cacheGroups: {
-        style1: {
-          test: /style1/,
-          enforce: true,
-        },
-        style2: {
-          test: /style2/,
-          enforce: true,
-        },
+        // style1: {
+        //   test: /style1/,
+        //   enforce: true,
+        // },
+        // style2: {
+        //   test: /style2/,
+        //   enforce: true,
+        // },
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
