@@ -1,13 +1,19 @@
-# webpack-split-chunks-test
-
 ## Setup
 
 `npm i && npm run build && npm run serve`
 
-## No split CSS chunks
+## Expected result
 
-It's expected, and the color is green, see the import order in `src/index.js`
+The page should contains 🆗 not 🆖, because `src/style2.css` is imported after `src/style1.css`.
 
-## Split CSS Chunks (uncomment the comments in webpack.config.js)
+## CSS generation method
 
-The color is red, the css chunks inserted into the html are not the same as the ones in the bundle
+To use `mini-css-extract-plugin`, in `src/webpack.config.js`, set `EXTRACT` to `true`. Or [native CSS support (experimental)](https://webpack.js.org/configuration/experiments/#experimentscss) will be used.
+
+## Split chunks
+
+To enable split chunks, in `src/webpack.config.js`, set `SPLIT_CHUNKS` to `true`.
+
+## Test prirority
+
+To set chunk split priority to enforce chunk order, in `src/webpack.config.js`, set `PRIORITY` to `true`.

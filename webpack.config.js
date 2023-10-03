@@ -7,8 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const EXTRACT = false;
-const SPLIT_CHUNKS = true;
-const PRIORITY = true;
+const SPLIT_CHUNKS = false;
+const PRIORITY = false;
 
 export default {
   mode: "production",
