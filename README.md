@@ -17,3 +17,5 @@ To enable split chunks, in `src/webpack.config.js`, set `SPLIT_CHUNKS` to `true`
 ## Test prirority
 
 To set chunk split priority to enforce chunk order, in `src/webpack.config.js`, set `PRIORITY` to `true`.
+
+Note [the order is not guaranteed](https://github.com/webpack-contrib/mini-css-extract-plugin/issues/548#issuecomment-779233845)
