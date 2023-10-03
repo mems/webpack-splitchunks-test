@@ -6,24 +6,31 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-/**
- * @type {import('webpack').Configuration}
- */
-const config = {
+const EXTRACT = false;
+const SPLIT_CHUNKS = true;
+const PRIORITY = true;
+
+export default {
   mode: "production",
   devtool: false,
-  entry: "./src/index.js",
+  entry: ["./src/style1.css", "./src/style2.css"],
   output: {
     path: resolve(__dirname, "dist"),
-    chunkFilename: "[name].js",
+    filename: "[contenthash].js",
+    chunkFilename: "[contenthash].js",
     clean: true,
+  },
+  experiments: {
+    css: true,
   },
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
+      EXTRACT
+        ? {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
+        }
+        : null,
     ],
   },
   plugins: [
@@ -31,33 +38,35 @@ const config = {
       minify: false,
       template: "./index.html",
     }),
-    new MiniCssExtractPlugin(),
+    EXTRACT
+      ? new MiniCssExtractPlugin({
+        filename: "[contenthash].css",
+        chunkFilename: "[contenthash].css",
+      })
+      : null,
   ],
   optimization: {
     splitChunks: {
       chunks: "all",
       cacheGroups: {
-        // style1: {
-        //   test: /style1/,
-        //   enforce: true,
-        // },
-        // style2: {
-        //   test: /style2/,
-        //   enforce: true,
-        // },
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true,
-        },
+        ...(SPLIT_CHUNKS
+          ? {
+            style1: {
+              test: /style1/,
+              enforce: true,
+              priority: PRIORITY ? 20 : undefined,
+            },
+            style2: {
+              test: /style2/,
+              enforce: true,
+              priority: PRIORITY ? 10 : undefined,
+            },
+          }
+          : {
+            defaultVendors: false,
+            default: false,
+          }),
       },
     },
   },
 };
-
-export default config;

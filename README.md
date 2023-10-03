@@ -2,9 +2,9 @@
 
 ## Setup
 
-`yarn && yarn build && yarn serve`
+`npm i && npm run build && npm run serve`
 
-## Bundle One Css File
+## No split CSS chunks
 
 It's expected, and the color is green, see the import order in `src/index.js`
 
